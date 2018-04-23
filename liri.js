@@ -5,7 +5,7 @@ var request = require("request");
 var fs = require("fs");
 
 var twitter = require("twitter");
-var spotify = require ("spotify");
+var spotify = require ("node-spotify-api");
 
 var liriHello = process.argv[2];
 
@@ -28,14 +28,14 @@ var input = "";
 //Possible commands and instructions for the user
 switch(liriHello) {
 	case "my-tweets": myTweets(); break;
-	case "spotify-this-song": spotifyThisSong(); break;
-	case "movie-this": movieThis(); break;
+    case "spotify-this-song": spotifyThisSong(); break;
+    case "movie-this": movieThis(); break;
 	case "do-what-it-says": doThing(); break;
 	
 	default: console.log("\r\n" + "Type one of the following commands after 'node liri.js' : " + "\r\n" +
-		"1. my-tweets 'any twitter name' " + "\r\n" +
-		"2. spotify-this-song 'any song name' " + "\r\n" +
-		"3. movie-this 'any movie name' " + "\r\n" +
+		"1. my-tweets" + "\r\n" +
+		"2. spotify-this-song 'insert any song name' " + "\r\n" +
+		"3. movie-this 'insert any movie name' " + "\r\n" +
 		"4. do-what-it-says" + "\r\n" +
 		"Be sure to put the movie or song name in quotation marks if it's more than one word.");
 };
@@ -43,7 +43,7 @@ switch(liriHello) {
 
 //Twitter function
 function myTweets() {
-	var client = new Twitter(keys.twitter);
+	var client = new twitter(keys.twitter);
 	var params = {screen_name: 'KippyTweets'} && {count: 20};
 
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -65,7 +65,7 @@ function myTweets() {
 
 //Spotify function
 function spotifyThisSong() {
-	var spotify = new Spotify(keys.spotify);
+	var spotify = new spotify(keys.spotify);
 
 	if (input != false) {
         
@@ -99,7 +99,7 @@ function spotifyThisSong() {
 
     } else {
 
-        spotify.search ({
+        {spotify.search ({
             type: 'track',
             query: 'ace+of+base+sign' + '&limit=1&'
         },
@@ -131,7 +131,7 @@ function spotifyThisSong() {
 
 //OMDB function
 function movieThis() {
-	request('http://www.omdbapi.com/?t=' + value + '&y=&plot=short&tomatoes=true&r=json', function(error, response, body) {
+	request('http://www.omdbapi.com/?t=' + input + '&y=&plot=short&tomatoes=true&r=json', function(error, response, body) {
 
 	if (input != false) {
 
