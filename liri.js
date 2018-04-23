@@ -32,11 +32,11 @@ switch(liriHello) {
 	case "movie-this": movieThis(); break;
 	case "do-what-it-says": doThing(); break;
 	
-	default: console.log("\r\n" +"Try typing one of the following commands after 'node liri.js' : " +"\r\n"+
-		"1. my-tweets 'any twitter name' " +"\r\n"+
-		"2. spotify-this-song 'any song name' "+"\r\n"+
-		"3. movie-this 'any movie name' "+"\r\n"+
-		"4. do-what-it-says."+"\r\n"+
+	default: console.log("\r\n" + "Type one of the following commands after 'node liri.js' : " + "\r\n" +
+		"1. my-tweets 'any twitter name' " + "\r\n" +
+		"2. spotify-this-song 'any song name' " + "\r\n" +
+		"3. movie-this 'any movie name' " + "\r\n" +
+		"4. do-what-it-says" + "\r\n" +
 		"Be sure to put the movie or song name in quotation marks if it's more than one word.");
 };
 
@@ -136,21 +136,21 @@ function movieThis() {
 	if (input != false) {
 
         console.log("---------------------------------------------------");
-        console.log("The movie's name is: " + JSON.parse(body).Title);
+        console.log("Title: " + JSON.parse(body).Title);
         console.log("");
-        console.log("The movie was released in: " + JSON.parse(body).Year);
+        console.log("This movie was released in: " + JSON.parse(body).Year);
         console.log("");
-        console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+        console.log("Rating: " + JSON.parse(body).imdbRating);
         console.log("");
-        console.log("The Rotten Tomatoes rating is: " + JSON.parse(body).tomatoRating);
+        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).tomatoRating);
         console.log("");
         console.log("This movie was produced in: " + JSON.parse(body).Country);
         console.log("");
         console.log("This movie's language is in: " + JSON.parse(body).Language);
         console.log("");
-        console.log("The movie's plot: " + JSON.parse(body).Plot);
+        console.log("Plot: " + JSON.parse(body).Plot);
         console.log("");
-        console.log("The movie's actors: " + JSON.parse(body).Actors);
+        console.log("Actors: " + JSON.parse(body).Actors);
         console.log("");
 
         } else {
@@ -158,21 +158,21 @@ function movieThis() {
             request('http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&tomatoes=true&r=json', function(error, response, body) {
 
                 console.log("---------------------------------------------------");
-                console.log("The movie's name is: " + JSON.parse(body).Title);
+                console.log("Title: " + JSON.parse(body).Title);
                 console.log("");
-                console.log("The movie was released in: " + JSON.parse(body).Year);
+                console.log("This movie was released in: " + JSON.parse(body).Year);
                 console.log("");
-                console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+                console.log("Rating: " + JSON.parse(body).imdbRating);
                 console.log("");
-                console.log("The Rotten Tomatoes rating is: " + JSON.parse(body).tomatoRating);
+                console.log("Rotten Tomatoes Rating: " + JSON.parse(body).tomatoRating);
                 console.log("");
                 console.log("This movie was produced in: " + JSON.parse(body).Country);
                 console.log("");
                 console.log("This movie's language is in: " + JSON.parse(body).Language);
                 console.log("");
-                console.log("The movie's plot: " + JSON.parse(body).Plot);
+                console.log("Plot: " + JSON.parse(body).Plot);
                 console.log("");
-                console.log("The movie's actors: " + JSON.parse(body).Actors);
+                console.log("Actors: " + JSON.parse(body).Actors);
                 console.log("");
             });
         }
