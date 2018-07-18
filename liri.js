@@ -5,7 +5,7 @@ var request = require("request");
 var fs = require("fs");
 
 var twitter = require("twitter");
-var spotify = require("node-spotify-api");
+var Spotify = require("node-spotify-api");
 
 var liriHello = process.argv[2];
 
@@ -65,7 +65,7 @@ function myTweets() {
 
 //Spotify function
 function spotifyThisSong() {
-    var spotify = new spotify(keys.spotify);
+    var spotify = new Spotify(keys.spotify);
 
     if (input != false) {
         
