@@ -5,12 +5,12 @@ var request = require("request");
 var fs = require("fs");
 
 var twitter = require("twitter");
-var spotify = require ("node-spotify-api");
+var spotify = require("node-spotify-api");
 
 var liriHello = process.argv[2];
 
 //empty variable for user input
-var input = "";
+var input = process.argv[3];
 
 // var spotify = new Spotify(keys.spotify);
 // var client = new Twitter(keys.twitter);
@@ -27,26 +27,26 @@ var input = "";
 
 //Possible commands and instructions for the user
 switch(liriHello) {
-	case "my-tweets": myTweets(); break;
+    case "my-tweets": myTweets(); break;
     case "spotify-this-song": spotifyThisSong(); break;
     case "movie-this": movieThis(); break;
-	case "do-what-it-says": doThing(); break;
-	
-	default: console.log("\r\n" + "Type one of the following commands after 'node liri.js' : " + "\r\n" +
-		"1. my-tweets" + "\r\n" +
-		"2. spotify-this-song 'insert any song name' " + "\r\n" +
-		"3. movie-this 'insert any movie name' " + "\r\n" +
-		"4. do-what-it-says" + "\r\n" +
-		"Be sure to put the movie or song name in quotation marks if it's more than one word.");
+    case "do-what-it-says": doThing(); break;
+    
+    default: console.log("\r\n" + "Type one of the following commands after 'node liri.js' : " + "\r\n" +
+        "1. my-tweets" + "\r\n" +
+        "2. spotify-this-song 'insert any song name' " + "\r\n" +
+        "3. movie-this 'insert any movie name' " + "\r\n" +
+        "4. do-what-it-says" + "\r\n" +
+        "Be sure to put the movie or song name in quotation marks if it's more than one word.");
 };
 
 
 //Twitter function
 function myTweets() {
-	var client = new twitter(keys.twitter);
-	var params = {screen_name: 'KippyTweets'} && {count: 20};
+    var client = new twitter(keys.twitter);
+    var params = {screen_name: 'KippyTweets'} && {count: 20};
 
-	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
 
             console.log("---------------------------------------------------");
@@ -65,9 +65,9 @@ function myTweets() {
 
 //Spotify function
 function spotifyThisSong() {
-	var spotify = new spotify(keys.spotify);
+    var spotify = new spotify(keys.spotify);
 
-	if (input != false) {
+    if (input != false) {
         
         spotify.search ({
             type: 'track',
@@ -110,19 +110,19 @@ function spotifyThisSong() {
                 return;
             }
 
-            	console.log("---------------------------------------------------");
-            	console.log(" ");
-            	console.log("Since you didnt enter a song, take a look at this one: ");
-            	console.log(" ");
-            	console.log("Track Title: " + data.tracks.items[0].name);
-            	console.log(" ");
-            	console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
-            	console.log(" ");
-            	console.log("Album Name: " + data.tracks.items[0].album.name);
-            	console.log(" ");
-            	console.log("Preview URL: " + data.tracks.items[0].preview_url);
-            	console.log(" ");
-            	console.log("---------------------------------------------------");
+                console.log("---------------------------------------------------");
+                console.log(" ");
+                console.log("Since you didnt enter a song, take a look at this one: ");
+                console.log(" ");
+                console.log("Track Title: " + data.tracks.items[0].name);
+                console.log(" ");
+                console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
+                console.log(" ");
+                console.log("Album Name: " + data.tracks.items[0].album.name);
+                console.log(" ");
+                console.log("Preview URL: " + data.tracks.items[0].preview_url);
+                console.log(" ");
+                console.log("---------------------------------------------------");
             });
         }
     }
@@ -131,9 +131,9 @@ function spotifyThisSong() {
 
 //OMDB function
 function movieThis() {
-	request('http://www.omdbapi.com/?t=' + input + '&y=&plot=short&tomatoes=true&r=json', function(error, response, body) {
+    request('http://www.omdbapi.com/?t=' + input + '&y=&plot=short&tomatoes=true&r=json&apikey=trilogy', function(error, response, body) {
 
-	if (input != false) {
+    if (input != false) {
 
         console.log("---------------------------------------------------");
         console.log("Title: " + JSON.parse(body).Title);
@@ -182,14 +182,14 @@ function movieThis() {
 
 //Do What It Says function
 function doThing() {
-	fs.readFile("random.txt", "utf8", function(error, data) {
-		
-		if (!error) {
-			doThingResults = data.split(",");
-			spotifyThisSong(doThingResults[0], doThingResults[1]);
-		
-		} else {
-			console.log("Error occurred: " + error);
-		}
-	});
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        
+        if (!error) {
+            doThingResults = data.split(",");
+            spotifyThisSong(doThingResults[0], doThingResults[1]);
+        
+        } else {
+            console.log("Error occurred: " + error);
+        }
+    });
 };
